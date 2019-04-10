@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  server:
+    build: .
+    ports:
+      - 7000:80
+    volumes:
+      - ./:/var/www/html
+      - ./docker/logs:/var/log/apache2
+      - ./docker/php/php.ini/:/usr/local/etc/php/php.ini
+    links:
+      - db
+
+  db:
+    image: mysql:8.0.2
+    ports:
+      - 7100:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+
+  myadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 7200:80
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: db
+    depends_on:
+      - db
