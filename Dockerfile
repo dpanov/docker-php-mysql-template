@@ -1,5 +1,5 @@
 FROM php:7.1.7-apache
-MAINTAINER Varianto:25 <mail@varianto25.com>
+MAINTAINER Dimitar Panov <mail@dpanov.net>
 
 # Copy local files to the proper docker container folder
 ADD ./ /var/www/html
